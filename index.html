@@ -1,118 +1,269 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Hola!</title>
-		<!--Lo que sigue es un poco de CSS-->
-		<style>
-			/* Dentro de CSS los comentarios se escriben de esta manera */
-			body{padding:3rem 7rem; font-family: Helvetica, Arial, sans-serif; line-height:1.618034;}
-			@media (orientation:portrait){
-				body{padding:3rem;}
-			}			
-			body.hidden { display:none; }
-			div#mapid{ width: 600px;  height: 400px;  margin:2rem 0rem;}
-		</style>
-		<!-- Acá estamos vinculando con el estilo CSS de una biblioteca de JS-->
-	 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-	   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-	   crossorigin=""/>
-	 	<!-- Acá estamos vinculando con una biblioteca de JS: leaflet.js-->
-	 	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-	   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-	   crossorigin=""></script>
-	</head>
-	<body class="hidden">
-		<h1>Hospitales en Santiago</h1>
-		<p>hola.</p>
-		<p>estos son los hospitales en santiago</p>
-		<div id="mapid"></div>
-		<!--Acá estamos vinculando con otra biblioteca de JS: jQuery-->	
-		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-		<!--Lo que sigue es programación que aprovecha las biblitecas de JS vinculadas-->	
-		<script>
-		$(document).ready(function () {
-			$('body').fadeIn(1000).removeClass('hidden');
-			$('h1,a').css('color','red');
-			var data = [
-				{
-					hospital:"dr rob rio",
-					numero:2,
-					lat:-33.4208722,
-					lon: -70.6532499
-				},
-				{
-					hospital:"ex posta cent",
-					numero:4,
-					lat: -33.4432871,
-					lon: -70.6368518
-				},
-				{
-					hospital:"mas a la derecha",
-					numero:2,
-					lat: -33.4355138,
-					lon: -70.6241214
-				},
-                {
-                    hospital:"un poco mas arriba",
-                    numero:2,
-                    lat: -33.4282737,
-                    lon: -70.6176432
-                },
-                {
-                    hospital:"bulnes",
-                    numero:1,
-                    lat: -33.4184183,
-                    lon: -70.6047056
-                },
-                {
-                    hospital:"bretana",
-                    numero:1,
-                    lat: -33.4359575,
-                    lon: -70.5960831
-                },
-                {
-                    hospital:"colonial carabineros",
-                    numero:2,
-                    lat: -33.4482711,
-                    lon: -70.6077125
-                },
-                {
-                    hospital:"donde hay tres",
-                    numero:3,
-                    lat: -33.4622302,
-                    lon: -70.6421535
-                },
-                {
-                    hospital:"infecciosas",
-                    numero:2,
-                    lat: -33.4864778,
-                    lon: -70.6482072
-                }
-                
-			]
-			console.log(data);
-				var mymap = L.map('mapid').setView([-33.4372, -70.6506], 10);
-				L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-					maxZoom: 20,
-					id: 'mapbox.outdoors',
-					attribution: '<a href="https://www.mapbox.com/">Mapbox</a>'
-				}).addTo(mymap);
-				// Creamos algunas variables, sin asignarles contenido de inmediato
-				var lon, lat, p, circle;
-				for (var x = 0; x < data.length ; x++ ){
-					lon = data[x].lon;
-					lat = data[x].lat;
-					p = data[x].numero;				
-					circle = L.circle([lat, lon], {
-					    fillColor: 'red',
-					    fillOpacity: 0.5,
-					    weight:0,
-					    radius : p * 100
-					}).addTo(mymap);
-				} //acá estamos cerrando el ciclo for que me dibuja cada círculo!
-		}); // acá estamos cerrando la función que es posible por la carga!
-		</script>
-	</body>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>El cobre en Chile</title>
+    <link rel="icon" href="img/favicon.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"/>
+
+    <!--
+    color aquí 
+    los metadatos 
+    que puedan generar 
+    con https://megatags.co/
+    -->
+
+    <!-- COMMON TAGS -->
+    <meta charset="utf-8">
+    <title>El cobre en Chile</title>
+    <!-- Search Engine -->
+    <meta name="description" content="Algunos datos interesantes acerca del mineral más importante del país.">
+    <meta name="image" content="https://vignette.wikia.nocookie.net/fortnite/images/9/9e/Icon_Metal_Copper.png/revision/latest/scale-to-width-down/480?cb=20170806015414">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="El cobre en Chile">
+    <meta itemprop="description" content="Algunos datos interesantes acerca del mineral más importante del país.">
+    <meta itemprop="image" content="https://vignette.wikia.nocookie.net/fortnite/images/9/9e/Icon_Metal_Copper.png/revision/latest/scale-to-width-down/480?cb=20170806015414">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content="El cobre en Chile">
+    <meta name="og:description" content="Algunos datos interesantes acerca del mineral más importante del país.">
+    <meta name="og:image" content="https://vignette.wikia.nocookie.net/fortnite/images/9/9e/Icon_Metal_Copper.png/revision/latest/scale-to-width-down/480?cb=20170806015414">
+    <meta name="og:site_name" content="El cobre en Chile">
+    <meta name="og:locale" content="es_ES">
+    <meta name="og:type" content="website">
+    
+    <!-- Vamos a buscar el CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Vamos a buscar el CSS de Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Vamos por nuestro CSS, basado en https://startbootstrap.com/template-overviews/grayscale/ -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Aquí vamos por el estilo y script del mapa-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+    
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+    
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top"><span class="titular"></span></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#dataviz">Visualizaciones</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Este encabezado viene de https://startbootstrap.com/snippets/video-header/ -->
+    <header>
+        <div class="overlay"></div>
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <!--Favor revisar https://www.w3schools.com/html/html5_video.asp-->
+            <source src="video/minero.mp4" type="video/mp4">
+        </video>
+        <div class="container h-100">
+            <div class="d-flex text-center h-100">
+                <div class="my-auto w-100 text-white">
+                    <h1 class="display-3 titular"></h1>
+                    <h5>Algunos datos acerca del cobre en el país sudamericano</h5>
+                    <p class="pt-3"><a href="#about"><i class="fas fa-3x fa-arrow-alt-circle-down"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- About Section -->
+    <section id="about" class="about-section text-center">
+        <div class="container">
+            <div class="row">
+                <div id=info class="col-lg-8 mx-auto">
+                    <h2 class="text-white mb-4">La importancia del cobre en Chile</h2>
+                    <p class="text-white-50">La minería es una de las principales actividades de la economía chilena. Actualmente aporta el 9 % del PIB nacional, y es el área con mayor inversión extranjera con un 33,3 % del total. Chile país es el principal productor a nivel mundial de cobre.
+                    <p class="text-white-50">Escondida es actualmente la mina de mayor producción de cobre en el mundo.</p>
+                    <p class="text-white-50">En 2016 se produjeron 5545 miles de toneladas métricas de cobre en Chile, lo que representó un 27% de la producción mundial. El país sigue ubicado como el máximo productor de este metal, seguido de Perú con un 11% y China con un 9%. El 90% del cobre que actualmente se produce proviene de la minería a cielo abierto.</p>
+                </div>
+            </div>
+            <img src="media/ipad.png" class="img-fluid" alt="">
+        </div>
+    </section>
+
+    <!-- dataviz Section -->
+    <section id="dataviz" class="dataviz-section bg-light">
+        <div class="container">
+
+            <!-- MAPA -->
+            <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                <div class="col-xl-8 col-lg-7">
+                    <div id="leaflet"></div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="featured-text text-center text-lg-left">
+                        <h4>Mapa</h4>
+                        <p class="text-black-50 mb-0">Entre las últimas líneas del código fuente encontrarán un script que parte con un "var mymap = L.map('leaflet')…", con todo ese script se dibuja el mapa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRIMER GRÁFICO -->
+            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div class="col-lg-6">
+                    <svg id="chart-1"></svg>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-white">Gráfico uno</h4>
+                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                                <hr class="d-none d-lg-block mb-0 ml-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEGUNDO GRÁFICO -->
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6">
+                    <svg id="chart-2"></svg>
+                </div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-right">
+                                <h4 class="text-white">Gráfico dos</h4>
+                                <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                                <hr class="d-none d-lg-block mb-0 mr-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black small text-center text-white-50">
+        <div class="container">
+            <p><span class="titular"></span> fue desarrollado por Nombre Apellido para Multimedia II</p>
+            <p>Segundo semestre, 2018 · Diseño Gráfico</p>
+            <p>Universidad de Chile</p>
+            <p><a href="#page-top"><i class="fas fa-arrow-alt-circle-up"></i></a></p>
+        </div>
+    </footer>
+
+    <!-- Vamos a buscar algo de JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!--ahora aprovechamos que Bootstrap necesita jQuery, para manipular el DOM-->
+    <script>
+        (function($) {
+            "use strict"; // Start of use strict
+
+            $(".titular").text("EL COBRE EN CHILE");
+        })(jQuery); // End of use strict
+    </script>
+
+    <!--el tema de bootstrap que usamos necesita este script para funcionar-->
+    <script src="js/theme.js"></script>
+
+    <!--acá comienzan las visualizaciones-->
+
+    <!--primero el mapa
+
+    https://es.datachile.io/products/productos-minerales-05/mineral-de-cobre-052603
+
+    https://es.wikipedia.org/wiki/Gran_Miner%C3%ADa_del_Cobre_en_Chiles
+    
+    -->
+
+    <script>
+        var mymap = L.map('leaflet').setView([-24.6191859,-71.044486], 5);
+
+        var georeferencias = [
+        {
+            lugar: "Borlando",
+            coordenadas: [-23.746693,-70.4420194],
+            numero: 2
+        }, {
+            lugar: "Chuquicamata",
+            coordenadas: [-22.3090203,-68.9188422],
+            numero: 2
+        }, {
+            lugar: "Punta de Choros",
+            coordenadas: [-29.2504291, -71.4787068],
+            numero: 2
+        }, {
+            lugar: "Isla de Chiloé",
+            coordenadas: [-42.5901263, -74.9954785],
+            numero: 2
+        }, {
+            lugar: "Melinka, en el archipiélago de las Guaitecas",
+            coordenadas: [-43.8982837, -73.7537762],
+            numero: 10
+        }, {
+            lugar: "Parque Marino Francisco Coloane",
+            coordenadas: [-53.7731372, -71.9488694],
+            numero: 2
+        }, {
+            lugar: "Antártica",
+            coordenadas: [-62.1962582, -60.0995481],
+            numero: 2
+        }
+        ];
+        
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 5,
+            minZoom: 3,
+            id: 'mapbox.streets'
+        }).addTo(mymap);
+        
+        for (var x = 0; x < georeferencias.length; x++) {
+            lat = georeferencias[x].coordenadas[0];
+            lon = georeferencias[x].coordenadas[1];
+            p = georeferencias[x].numero;
+            circle = L.circle([lat, lon], {
+                fillColor: 'orange',
+                fillOpacity: 0.8,
+                weight: 0,
+                radius: 10000 * p
+            }).addTo(mymap);
+            console.log(lat + "," + lon);
+        }
+    </script>
+
+    <!--luego voy a buscar una biblioteca que Data Driven Documents (DDD = d3)-->
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!--esto es para un gráfico -->
+
+    <script>
+        d3.select("#chart-1").attr("width", "100%").attr("height", "400").style("background", "red");
+    </script>
+
+    <!--esto es para otro gráfico -->
+
+    <script>
+        d3.select("#chart-2").attr("width", "100%").attr("height", "400").style("background", "blue");
+    </script>
+
+</body>
+
 </html>
